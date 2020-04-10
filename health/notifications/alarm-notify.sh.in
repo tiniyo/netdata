@@ -1004,14 +1004,14 @@ send_tiniyo() {
 		for user in ${recipients}; do
 			httpcode=$(docurl -X POST \
 				-u "${accountauthid}:${accountsecret}" \
-				"https://api.tiniyo.com/v1/Account/${accountsauthid}/Messages" \
+				"https://api.tiniyo.com/v1/Account/${accountauthid}/Messages" \
 				-d '{ "dst": "'${user}'", "src": "'${tiniyonumber}'", "text": "'${title} ${message}'" }')
 
 			if [ "${httpcode}" = "200" ]; then
 				info "sent Tiniyo SMS for: ${host} ${chart}.${name} is ${status} to '${user}'"
 				sent=$((sent + 1))
 			else
-				error "failed to send Twilio SMS for: ${host} ${chart}.${name} is ${status} to '${user}' with HTTP error code ${httpcode}."
+				error "failed to send Tiniyo SMS for: ${host} ${chart}.${name} is ${status} to '${user}' with HTTP error code ${httpcode}."
 			fi
 		done
 
